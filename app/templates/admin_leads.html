@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Admin • Leads • TWT Lead Assurance{% endblock %}
+
+{% block content %}
+<h1>Leads Inbox</h1>
+<p>Newest leads appear first.</p>
+
+<div class="table-wrap">
+    <table class="leads-table">
+        <thead>
+            <tr>
+                <th class="nowrap">Date</th>
+                <th>Name</th>
+                <th class="nowrap">Phone</th>
+                <th>Service</th>
+                <th class="nowrap">Location</th>
+                <th class="nowrap">Status</th>
+                <th>Project Details</th>
+            </tr>
+        </thead>
+
+    <tbody>
+        {% for lead in leads %}
+        <tr>
+            <td class="nowrap">{{ lead.created_at.strftime( '%m/%d %H:%M') }}</td>
+            <td>{{ lead.name }}</td>
+            <td class="nowrap">
+                <a href="tel:{{ lead.phone }}">{{ lead.phone }}</a>
+            </td>
+            <td>{{ lead.service_type }}</td>
+            <td>{{ lead.location }}</td>
+
+            <td class="nowrap">
+                <form method="post" action="/admin/leads/{{ lead.id }}/status" style="margin:0;">
+                    <select name="status" onchange="this.form.submit()">
+                        <option value="NEW" {% if lead.status == "NEW" %}selected{% endif %}>NEW</option>
+                        <option value="CONTACTED" {% if lead.status == "CONTACTED" %}selected{% endif %}>CONTACTED</option>
+                        <option value="CLOSED" {% if lead.status == "CLOSED" %}selected{% endif %}>CLOSED</option>
+                        <option value="LOST" {% if lead.status == "LOST" %}selected{% endif %}>LOST</option>
+                    </select>
+                </form>
+            </td>
+
+            <td>
+                <div class="notes-box">{{ lead.notes }}</div>
+            </td>
+        </tr>
+
+        {% else %}
+        <tr>
+            <td colspan="7" style="padding:12px;">No leads yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

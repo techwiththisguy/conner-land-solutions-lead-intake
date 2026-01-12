@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}TWT Lead Assurance{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 16px; }
+        header { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+        nav a { margin-left: 8px; }
+        a { text-decoration: none; }
+        .btn { display: inline-block; padding: 10px 14px; border: 1px solid #ccc; border-radius: 8px; }
+        .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-top: 18px;}
+        label { display:block; margin-top: 12px; font-weight: 600; }
+        input, select, textarea { width: 100%; padding:10px; margin-top: 6px; border-radius: 8px; border: 1px solid #ccc; box-sizing: border-box; }
+        textarea { min-height: 120px; }
+        .msg { padding: 10px 12px; border-radius: 10px; margin: 12px 0; }
+        .success { background: #eaf7ea; border 1px solid #b6e2b6; }
+        .error { background: #fff0f0; border 1px solid #f2b8b8; }
+        footer { margin-top: 40px; color #777; fonr-size: 14px; }
+
+        /* ===== Admin table responsiveness ===== */
+        .table-wrap { width:100%; overflow-x:auto; -webkit-overflow-scrolling: touch; border: 1px solid #eee; border-radius: 10px; }
+        .leads-table { width:100%; mid-width: 860px; /* forces sideways scroll on phones */; border-collapse: collapse; }
+        .leads-table th, .leads-table td { padding: 8px; border-bottom: 1px solid #eee; vertical-align: top }
+        .leads-table th { text-align:left; white-space: nowrap; }
+        .nowrap { white-space: nowrap; }
+        .notes-box { max-width: 320px; max-height: 120px; overflow-y: auto; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; }
+        @media (max-width: 640px){
+            .notes-box{ max-width: 220px; }
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <strong>TWT Lead Assurance</strong><br/>
+            <span style="color:#666;">Lead Intake Platform (TechWithThisguyLLC)</span>
+        </div>
+        <nav>
+            <a class="btn" href="/">Home</a>
+            <a class="btn" href="/request-quote">Request a Quote</a>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="msg {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <main class="card">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        Built by Tech With Thisguy LLC
+    </footer>
+</body>
+</html>

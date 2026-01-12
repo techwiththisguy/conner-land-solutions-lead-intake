@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Admin Login • TWT Lead Assurance{% endblock %}
+
+{% block content %}
+<h1>Admin Login</h1>
+<p>Enter admin password to view and manage leads.</p>
+
+<form method="post">
+    <label>Password</label>
+    <input type="password" name="password" required />
+    <p style="margin-top:16px;">
+        <button class="btn" type="submit">Login</button>
+    </p>
+</form>
+{% endblock %}
