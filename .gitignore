@@ -1,1 +1,18 @@
-__pycache__/ 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+venv/
+
+# Environment variables
+.env
+
+# Flask instance folder (SQLite)
+instance/
+
+# OS junk
+.DS_Store
+Thumbs.db
